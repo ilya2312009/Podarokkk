@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Сюрприз для тебя ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', serif;
+            background: #fce4ec;
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            transition: opacity 0.6s ease, visibility 0.6s;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hidden-page {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ========= СТРАНИЦА 1: КОНВЕРТ ========= */
+        .envelope-page {
+            background: linear-gradient(145deg, #fce4ec 0%, #f8bbd0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .envelope-card {
+            background: #fffef7;
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem 1.8rem;
+            border-radius: 48px;
+            box-shadow: 0 35px 60px rgba(231, 235, 5, 0.2);
+            text-align: center;
+        }
+
+        .envelope-card h1 {
+            font-size: 2rem;
+            color: #b23c4b;
+            margin-bottom: 1rem;
+        }
+
+        .little-letter {
+            background: #fff5f0;
+            padding: 1.5rem;
+            border-radius: 32px;
+            margin: 20px 0;
+            border: 1px dashed #f2a0b0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #4a2e35;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-romantic {
+            background: #e27c8c;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #8b3c48;
+            transition: 0.1s linear;
+        }
+
+        .btn-romantic:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #8b3c48;
+        }
+
+        .btn-hint {
+            background: #b0a0a0;
+            box-shadow: 0 4px 0 #6e5e5e;
+        }
+
+        /* ========= СТРАНИЦА 2: ФОТО ГЛАЗА НА ЗАДНЕМ ФОНЕ ========= */
+        .iris-page {
+            position: relative;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .iris-page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://ibb.co/S7BjJwvc');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.85;
+            z-index: 0;
+        }
+
+        .iris-page::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .iris-container {
+            position: relative;
+            z-index: 10;
+            max-width: 500px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+            text-align: center;
+        }
+
+        .brand {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: #fff;
+
+        }
+
+        .feature-block {
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 18px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+        }
+
+        .letter {
+            margin: 25px 0;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #fff;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 18px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 35px 60px rgba(231, 235, 5, 0.2);
+        }
+
+        .question-block {
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 35px 60px rgba(231, 235, 5, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .question-block p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .question-block input {
+            width: 80%;
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: none;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .typewriter-block {
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: left;
+            display: none;
+            box-shadow: 0 35px 60px rgba(231, 235, 5, 0.2);
+        }
+
+        .typewriter-text {
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 150px;
+            color: #fff;
+        }
+
+        .info-links {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0 20px;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+        }
+
+        .btn-iris {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 28px;
+            font-size: 14px;
+            color: #111;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .small-link {
+            background: none;
+            border: none;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #fffef7;
+            max-width: 360px;
+            width: 85%;
+            padding: 2rem 1.8rem;
+            border-radius: 48px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #b23c4b;
+        }
+
+        .modal-content p {
+            color: #4a2e35;
+            margin-bottom: 24px;
+            font-size: 1rem;
+            background: #fff5f0;
+            padding: 1rem;
+            border-radius: 32px;
+            border: 1px dashed #f2a0b0;
+        }
+
+        .modal-btn {
+            background: #e27c8c;
+            border: none;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #8b3c48;
+        }
+
+        .qr-btn {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 11px;
+            color: #555;
+            cursor: pointer;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page envelope-page">
+        <div class="envelope-card">
+            <h1>🕊️💌 Тайный конверт 💌🕊️</h1>
+            <div class="little-letter">
+                <p>🌙 <strong>Моя сладкая,</strong></p>
+                <p>Я спрятал кое-что, что откроется только Вам.<br>
+                Нажми на кнопку — и начнётся маленькое чудо.</p>
+                <p>✨ <strong>Это только для твоих глаз!</strong> ✨</p>
+            </div>
+            <div class="button-group">
+                <button class="btn-romantic" id="openPage2Btn">➤ Открыть сюрприз</button>
+                <button class="btn-romantic btn-hint" id="hintBtn">❓ Не открывать</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2" class="page iris-page hidden-page">
+        <div class="iris-container">
+            <div class="main-title">✨Ваши глаза✨<br>самые красивые</div>
+            <div class="letter">
+                <p>Ваши глаза это самое прекрасное, что я видел в своей жизни.
+                В них сочетаются:
+                Красота ночного неба,
+                Океан любви,
+                И ослепительное сияние солнца...</p>
+                <p>Всё сказанное говорит лишь об одном: Ваши глаза - это целая вселенная. У меня на сердце появляется непреодолимое волнение каждый раз, когда их вижу, как в тот самый вечер 22 августа.</p>
+            </div>
+
+            <div id="questionBlock" class="question-block">
+                <p> <strong>Секретный вопрос:</strong><br>«Какая связь есть только у нас. Напиши два слова...»</p>
+                <input type="text" id="secretAnswer" placeholder="твой ответ" autocomplete="off">
+                <button class="btn-iris" id="checkAnswerBtn" style="background:white; color:black;">✨ Открыть продолжение ✨</button>
+            </div>
+
+            <div id="typewriterBlock" class="typewriter-block">
+                <div id="typewriterText" class="typewriter-text"></div>
+            </div>
+
+            <button class="small-link" id="backToPage1From2">← Назад к конверту</button>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <h3>💔 Неправильно, (Подсказка)</h3>
+            <p><strong> Нужно выбрать левую кнопку!</strong></p>
+            <button class="modal-btn" id="closeModalBtn">Попробовать снова</button>
+        </div>
+    </div>
+
+    <button class="qr-btn" id="qrHelperBtn">📲 QR-код</button>
+
+    <script>
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const openPage2Btn = document.getElementById('openPage2Btn');
+        const hintBtn = document.getElementById('hintBtn');
+        const backToPage1From2 = document.getElementById('backToPage1From2'); 
+        const secretAnswer = document.getElementById('secretAnswer');
+        const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+        const questionBlock = document.getElementById('questionBlock');
+        const typewriterBlock = document.getElementById('typewriterBlock');
+        const typewriterText = document.getElementById('typewriterText');
+        const errorModal = document.getElementById('errorModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        const fullText = "А еще я хочу сказать...                               Вы самое дорогое,      самое ценное,      самое желанное,      что есть в моей жизни.              Каждый день,    проведенный с Вами,    дороже золота,    а день прожитый без Вас -            становится бесконечно долгим       и       невыносимым.            Я люблю Вас не конкретно за что-то,    а за все в целом:      ослепительную улыбку,      завораживающий смех,      золотые волосы,      огненный характер,      пленящие глаза,   о которых можно говорить вечно,   ведь -      это самое прекрассное,   что есть в мире.        Делая этот сюрприз,   я 100 раз любовался Вашими               глазами.     Вы остались навсегда в моём...                                Сердце.         💖\n\n     Всегда твой,\n                       (Рыцарь,        доставший        звезду        с        неба     ✨)";
+        let typingInterval = null; 
+        let currentIndex = 0;
+        
+        function startTyping() {
+            if (typingInterval) clearInterval(typingInterval);
+            typewriterText.innerHTML = '';
+            currentIndex = 0;
+            
+            typingInterval = setInterval(() => {
+                if (currentIndex < fullText.length) {
+                    typewriterText.innerHTML += fullText[currentIndex];
+                    currentIndex++;
+                    typewriterBlock.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    clearInterval(typingInterval);
+                }
+            }, 115);
+        }
+        
+        function showPage(page) {
+            page1.classList.add('hidden-page');
+            page2.classList.add('hidden-page');
+            page.classList.remove('hidden-page');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        openPage2Btn.addEventListener('click', () => {
+            questionBlock.style.display = 'block';
+            typewriterBlock.style.display = 'none';
+            if (typingInterval) clearInterval(typingInterval);
+            secretAnswer.value = '';
+            showPage(page2);
+        });
+        
+        backToPage1From2.addEventListener('click', () => showPage(page1));
+        
+        hintBtn.addEventListener('click', () => {
+            errorModal.style.display = 'flex';
+        });
+        
+        checkAnswerBtn.addEventListener('click', () => {
+            let answer = secretAnswer.value.trim().toLowerCase();
+            const correctKeywords = ["миндальная связь", "миндальная"];
+            let isCorrect = false;
+            for (let kw of correctKeywords) {
+                if (answer.includes(kw)) isCorrect = true;
+            }
+            
+            if (isCorrect) {
+                questionBlock.style.display = 'none';
+                typewriterBlock.style.display = 'block';
+                startTyping();
+            } else {
+                errorModal.style.display = 'flex';
+            }
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            errorModal.style.display = 'none';
+            secretAnswer.focus();
+        });
+        
+        errorModal.addEventListener('click', (e) => {
+            if (e.target === errorModal) {
+                errorModal.style.display = 'none';
+                secretAnswer.focus();
+            }
+        });
+        
+        document.getElementById('qrHelperBtn').addEventListener('click', () => {
+            alert("Ссылка для QR-кода:\n" + window.location.href);
+        });
+    </script>
+</body>
+</html>
